@@ -1,18 +1,21 @@
-baseURL: "https://guoyuefei.github.io/"
+baseURL: "https://guoyuefei.github.io"
 title: "GGB-Blog"
 languageCode: "zh-cn"
 theme: "hugo-theme-stack"
-pagination: 
-  pagerSize: 10
 hasCJKLanguage: true
+
+pagination:
+  pagerSize: 10
+
+# 默认语言设为中文，不建议让默认语言也用子目录（可选）
 defaultContentLanguage: "zh-cn"
-defaultContentLanguageInSubdir: true
+defaultContentLanguageInSubdir: false
 
 # 作者信息
 author:
   name: "GGB"
   bio: "写点技术、生活与想法"
-  avatar: "img/avatar.png"
+  avatar: "/img/avatar.png"
 
 # Google Analytics / 其他统计
 services:
@@ -22,15 +25,41 @@ services:
 # 多语言配置
 languages:
   zh-cn:
-    title: "我的博客"
+    title: "码帐"
+    languageName: "中文"
     weight: 1
     params:
-      description: "一个使用 Hugo Stack 构建的中文博客"
+      description: "一个技术爱好者的博客"
+    menu:
+      main:
+        - name: "首页"
+          url: "/"
+          weight: 1
+        - name: "归档"
+          url: "/archives/"
+          weight: 2
+        - name: "关于"
+          url: "/about/"
+          weight: 3
+
   en:
-    title: "My Blog"
+    title: "Dev Camp"
+    languageName: "English"
     weight: 2
+    contentDir: "content/en"
     params:
-      description: "A bilingual blog built with Hugo Stack"
+      description: "A Technology Lover's Blog"
+    menu:
+      main:
+        - name: "Home"
+          url: "/en/"
+          weight: 1
+        - name: "Archives"
+          url: "/en/archives/"
+          weight: 2
+        - name: "About"
+          url: "/en/about/"
+          weight: 3
 
 # 站点参数
 params:
@@ -45,19 +74,19 @@ params:
   # 颜色主题
   colorScheme:
     toggle: true
-    default: "auto"   # 可选: auto / light / dark
+    default: "auto"
 
   # Header 设置
   header:
     showTitle: true
     layout: "basic"
 
-  # 评论系统：giscus
+  # 评论系统
   comments:
     enabled: true
     provider: "giscus"
     giscus:
-      repo: "GuoYuefei/GGB.github.io"
+      repo: "GuoYuefei/guoyuefei.github.io"
       repoID: "R_kgDOQQLBtw"
       category: "Announcements"
       categoryID: "DIC_kwDOQQLBt84CxfEY"
@@ -68,10 +97,10 @@ params:
       theme: "preferred_color_scheme"
       crossorigin: "anonymous"
 
-  # 分析统计（可用 Plausible/Umami）
+  # 分析统计
   analytics:
-    plausible: "blog.naturgift.fun"  # 可留空或填写 yourdomain.com
-    umami: ""      # 可留空或填写 umami 统计地址
+    plausible: "guoyuefei.github.io"
+    umami: ""
 
   # 页脚
   footer:
@@ -79,17 +108,3 @@ params:
     poweredby: true
     hugo: true
     theme: true
-
-# 菜单（中英文自动切换）
-menu:
-  main:
-    - name: "首页"
-      url: "/"
-      weight: 1
-    - name: "归档"
-      url: "/archives/"
-      weight: 2
-    - name: "关于"
-      url: "/about/"
-      weight: 3
-
