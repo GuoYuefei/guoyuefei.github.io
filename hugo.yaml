@@ -1,4 +1,4 @@
-baseURL: "http://localhost:1313/"
+baseURL: "https://guoyuefei.github.io/"
 title: "GGB-Blog"
 languageCode: "zh-cn"
 theme: "hugo-theme-stack"
