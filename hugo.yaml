@@ -1,0 +1,95 @@
+baseURL: "http://localhost:1313/"
+title: "GGB-Blog"
+languageCode: "zh-cn"
+theme: "hugo-theme-stack"
+pagination: 
+  pagerSize: 10
+hasCJKLanguage: true
+defaultContentLanguage: "zh-cn"
+defaultContentLanguageInSubdir: true
+
+# 作者信息
+author:
+  name: "GGB"
+  bio: "写点技术、生活与想法"
+  avatar: "img/avatar.png"
+
+# Google Analytics / 其他统计
+services:
+  googleAnalytics:
+    id: "G-XXXXXXX"
+
+# 多语言配置
+languages:
+  zh-cn:
+    title: "我的博客"
+    weight: 1
+    params:
+      description: "一个使用 Hugo Stack 构建的中文博客"
+  en:
+    title: "My Blog"
+    weight: 2
+    params:
+      description: "A bilingual blog built with Hugo Stack"
+
+# 站点参数
+params:
+  mainSections: ["posts"]
+  favicon: "img/favicon.ico"
+
+  # SEO / 元数据
+  description: "个人博客，分享技术、生活与思考"
+  keywords: ["博客", "Hugo", "技术", "生活"]
+  robots: "index, follow"
+
+  # 颜色主题
+  colorScheme:
+    toggle: true
+    default: "auto"   # 可选: auto / light / dark
+
+  # Header 设置
+  header:
+    showTitle: true
+    layout: "basic"
+
+  # 评论系统：giscus
+  comments:
+    enabled: true
+    provider: "giscus"
+    giscus:
+      repo: "GuoYuefei/GGB.github.io"
+      repoID: "R_kgDOQQLBtw"
+      category: "Announcements"
+      categoryID: "DIC_kwDOQQLBt84CxfEY"
+      mapping: "pathname"
+      inputPosition: "top"
+      lang: "zh-CN"
+      reactionsEnabled: "1"
+      theme: "preferred_color_scheme"
+      crossorigin: "anonymous"
+
+  # 分析统计（可用 Plausible/Umami）
+  analytics:
+    plausible: "blog.naturgift.fun"  # 可留空或填写 yourdomain.com
+    umami: ""      # 可留空或填写 umami 统计地址
+
+  # 页脚
+  footer:
+    since: 2025
+    poweredby: true
+    hugo: true
+    theme: true
+
+# 菜单（中英文自动切换）
+menu:
+  main:
+    - name: "首页"
+      url: "/"
+      weight: 1
+    - name: "归档"
+      url: "/archives/"
+      weight: 2
+    - name: "关于"
+      url: "/about/"
+      weight: 3
+

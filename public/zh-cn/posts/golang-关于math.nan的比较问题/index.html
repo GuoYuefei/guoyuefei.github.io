@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这是我的第一篇 Hugo 博客文章">
+<title>golang</title>
+
+<link rel='canonical' href='http://localhost:1313/zh-cn/posts/golang-%E5%85%B3%E4%BA%8Emath.nan%E7%9A%84%E6%AF%94%E8%BE%83%E9%97%AE%E9%A2%98/'>
+
+<link rel="stylesheet" href="/scss/style.min.4d36f8dc1fd48129e1635deb4b8eb2870fa09474f7280c4cb606d40b2526994b.css"><meta property='og:title' content="golang">
+<meta property='og:description' content="这是我的第一篇 Hugo 博客文章">
+<meta property='og:url' content='http://localhost:1313/zh-cn/posts/golang-%E5%85%B3%E4%BA%8Emath.nan%E7%9A%84%E6%AF%94%E8%BE%83%E9%97%AE%E9%A2%98/'>
+<meta property='og:site_name' content='我的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Hugo' /><meta property='article:tag' content='博客' /><meta property='article:published_time' content='2025-11-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-06T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="golang">
+<meta name="twitter:description" content="这是我的第一篇 Hugo 博客文章">
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXX');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/zh-cn/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/zh-cn">我的博客</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/zh-cn/" selected></option>
+                                
+                                    <option value="http://localhost:1313/en/" ></option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/zh-cn/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/zh-cn/posts/golang-%E5%85%B3%E4%BA%8Emath.nan%E7%9A%84%E6%AF%94%E8%BE%83%E9%97%AE%E9%A2%98/">golang</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            这是我的第一篇 Hugo 博客文章
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-11-06T00:00:00Z'>Nov 06, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="关于mathnan-的比较问题">关于math.NaN() 的比较问题
+</h1><h2 id="缘起">缘起
+</h2><p>缘起于二刷map底层时看到的一个例子</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">float64</span>]<span style="color:#66d9ef">int</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">1.4</span>] = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">2.4</span>] = <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>[<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">NaN</span>()] = <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>[<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">NaN</span>()] = <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">m</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;[%v, %d] &#34;</span>, <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;\nk: %v, v: %d\n&#34;</span>, <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">NaN</span>(), <span style="color:#a6e22e">m</span>[<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">NaN</span>()])
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;k: %v, v: %d\n&#34;</span>, <span style="color:#ae81ff">2.400000000001</span>, <span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">2.400000000001</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;k: %v, v: %d\n&#34;</span>, <span style="color:#ae81ff">2.4000000000000000000000001</span>, <span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">2.4000000000000000000000001</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">NaN</span>() <span style="color:#f92672">==</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">NaN</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Output :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>[<span style="color:#ae81ff">2.4</span>, <span style="color:#ae81ff">2</span>] [<span style="color:#a6e22e">NaN</span>, <span style="color:#ae81ff">3</span>] [<span style="color:#a6e22e">NaN</span>, <span style="color:#ae81ff">3</span>] [<span style="color:#ae81ff">1.4</span>, <span style="color:#ae81ff">1</span>] 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">k</span>: <span style="color:#a6e22e">NaN</span>, <span style="color:#a6e22e">v</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">k</span>: <span style="color:#ae81ff">2.400000000001</span>, <span style="color:#a6e22e">v</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">k</span>: <span style="color:#ae81ff">2.4</span>, <span style="color:#a6e22e">v</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">false</span>
+</span></span></code></pre></div><p>由此证明， NaN 是不等于 NaN 的，然后我就在那边纠结这个为啥不相等呢？ 我们都知道接口有动态类型和动态值相同的限制才算相等，但是关键注意 NaN 本质上将还是 float64 类型， 也就是说关于接口的比较法则是不适用于它。</p>
+<p>于是我在那边查了半天资料，一无所获。（可能是我查资料的姿势不对吧）于是乎，决定自己动动手，找找看。</p>
+<h2 id="直接搜寻-go-的-源码无结论">直接搜寻 Go 的 源码（无结论）
+</h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// go version is 1.14.6</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// runtime/alg.go </span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">f64equal</span>(<span style="color:#a6e22e">p</span>, <span style="color:#a6e22e">q</span> <span style="color:#a6e22e">unsafe</span>.<span style="color:#a6e22e">Pointer</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span>(<span style="color:#f92672">*</span><span style="color:#66d9ef">float64</span>)(<span style="color:#a6e22e">p</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">*</span>(<span style="color:#f92672">*</span><span style="color:#66d9ef">float64</span>)(<span style="color:#a6e22e">q</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>还是要解读下的，可能刚入门的gopher认为这个不就是直接比较嘛，其实这个函数只是为了统一接口，在这个文件下有很多和这个函数相同函数原型的函数，方便各变量调用相等操作。</p>
+<p>可能我找的不够全面，反正从这边我无法找到关于 NaN 的特殊处理方法。</p>
+<p>额，既然到了源码这部分，还是来认识下什么是 NaN 吧！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// go version is 1.14.6</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// math/bits.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// NaN returns an IEEE 754 ``not-a-number&#39;&#39; value.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NaN</span>() <span style="color:#66d9ef">float64</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Float64frombits</span>(<span style="color:#a6e22e">uvnan</span>) }
+</span></span></code></pre></div><p>Float64frombits 函数顾名思义就是从比特位层面看int64是代表什么样的float64</p>
+<p>关键uvnan是什么， 其实就是一个常数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// go version is 1.14.6</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// math/bits.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uvnan</span>    = <span style="color:#ae81ff">0x7FF8000000000001</span>
+</span></span></code></pre></div><p>其实看源码的时候你能看到很多常数，有一个很有趣的常数 <!-- raw HTML omitted -->uvinf    = 0x7FF0000000000000<!-- raw HTML omitted -->,这个当符号位为正时，代表双精度的最大值，为负数时为最小值</p>
+<p>根据 IEEE 754 标准呢，NaN 应该是指数部分全1， 小数部分非零， 但是只要小数部分有一个非0，就能区分出是 uvinf 还是 uvnan 了。go语言这边使用的是小数部分最低位为1其余小数部分为0的方式。</p>
+<p>现在我们知道 NaN 到底是样什么东西了。</p>
+<h2 id="通过汇编找问题所在">通过汇编找问题所在
+</h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// main.go</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//import &#34;unsafe&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;math&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">a</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">NaN</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">xxxx</span>(<span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">xxxx</span>(<span style="color:#a6e22e">a</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">a</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>以上是我的测试代码， 其实可以不用fmt， 通过-N方式关闭编译优化就行。 使用一个xxxx函数的原因是为了方便定位比较这块的汇编代码。</p>
+<p>使用以下命令打印出汇编指令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">tool</span> <span style="color:#a6e22e">compile</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">S</span> <span style="color:#a6e22e">main</span>.<span style="color:#66d9ef">go</span>
+</span></span></code></pre></div><p>然后找到这块内容，这是我们需要的</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">&#34;&#34;.xxxx STEXT nosplit size=23 args=0x10 locals=0x0
+	0x0000 00000 (const.go:15)	TEXT	&#34;&#34;.xxxx(SB), NOSPLIT|ABIInternal, $0-16
+	0x0000 00000 (const.go:15)	PCDATA	$0, $-2
+	0x0000 00000 (const.go:15)	PCDATA	$1, $-2
+	0x0000 00000 (const.go:15)	FUNCDATA	$0, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)
+	0x0000 00000 (const.go:15)	FUNCDATA	$1, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)
+	0x0000 00000 (const.go:15)	FUNCDATA	$2, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)
+	0x0000 00000 (const.go:16)	PCDATA	$0, $0
+	0x0000 00000 (const.go:16)	PCDATA	$1, $0
+	0x0000 00000 (const.go:16)	MOVSD	&#34;&#34;.a+8(SP), X0
+	0x0006 00006 (const.go:16)	UCOMISD	X0, X0
+	0x000a 00010 (const.go:16)	SETEQ	CL
+	0x000d 00013 (const.go:16)	SETPC	AL
+	0x0010 00016 (const.go:16)	ANDL	AX, CX
+	0x0012 00018 (const.go:17)	MOVB	CL, &#34;&#34;.~r1+16(SP)
+	0x0016 00022 (const.go:17)	RET
+	0x0000 f2 0f 10 44 24 08 66 0f 2e c0 0f 94 c1 0f 9b c0  ...D$.f.........
+	0x0010 21 c1 88 4c 24 10 c3                             !..L$..
+</code></pre><p><!-- raw HTML omitted -->MOVSD	&ldquo;&quot;.a+8(SP), X0 <!-- raw HTML omitted -->这部分开始一直到 <!-- raw HTML omitted -->RET<!-- raw HTML omitted -->，都是我们所需要的。</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">MOVSD	&#34;&#34;.a+8(SP), X0 					; 将函数的第一个参数放入X0中 		双字长
+UCOMISD	X0, X0							; 无序比较					就是这一步，等会慢慢讲
+SETEQ	CL										; CL寄存器中存入ZF标志位
+SETPC	AL										; AL寄存器中存入PF标志位	奇偶标志位		// 参照SETNP指令 后来发现其实不是取PF，而是取PF反后放入AL寄存器
+ANDL	AX, CX									; 按位与运算
+MOVB	CL, &#34;&#34;.~r1+16(SP)				; 与运算结果放入返回值的地址上
+RET														; 返回
+</code></pre><p>比较的关键在<!-- raw HTML omitted -->UCOMISD<!-- raw HTML omitted -->指令的作用上。</p>
+<p>无序比较操作符 uncomisd 的作用如下：</p>
+<blockquote>
+<h4 id="vucomisd-all-versions-">(V)UCOMISD (all versions)<a class="link" href="https://www.felixcloutier.com/x86/ucomisd#-v-ucomisd--all-versions-"  target="_blank" rel="noopener"
+    > ¶</a>
+</h4><pre tabindex="0"><code>RESULT← UnorderedCompare(DEST[63:0] &lt;&gt; SRC[63:0]) {
+(* Set EFLAGS *) CASE (RESULT) OF
+ UNORDERED: ZF,PF,CF←111;
+ GREATER_THAN: ZF,PF,CF←000;
+ LESS_THAN: ZF,PF,CF←001;
+ EQUAL: ZF,PF,CF←100;
+ESAC;
+OF, AF, SF←0; }
+</code></pre></blockquote>
+<p>由此可见，当为无序时，也就是出现一个比较操作符是NaN时， ZF, PF, CF都为1， ZF AND PF == 1。 其他情况，ZF AND PF == 0， 这就做出了区分. 将按位与结果CL放入放回值地址，return函数。ps. 为嘛用0代表true， 感觉不对啊。 而且普通数比较相等还是不相等也没区分啊？？？所以上面一定有遗漏。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;unsafe&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">a</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">*</span>(<span style="color:#f92672">*</span><span style="color:#66d9ef">byte</span>)(<span style="color:#a6e22e">unsafe</span>.<span style="color:#a6e22e">Pointer</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">a</span>))
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#a6e22e">c</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Ouput :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>事实证明true是在内存里为1的。</p>
+<p>最后我把错误锁定在了对 setpc 指令的理解上。</p>
+<p>SETPC ,也就是普通汇编中SETNP这个指令，是当PF寄存器为0时，取值才为1.</p>
+<p>所以最后CL寄存器中的值应该为<!-- raw HTML omitted -->ZF AND NOT PF<!-- raw HTML omitted -->, 所以在无序比较中一旦有NaN存在，CL的值<!-- raw HTML omitted -->1 and 0<!-- raw HTML omitted -->就为0， 正常比较是不相等<!-- raw HTML omitted -->0 and 1<!-- raw HTML omitted -->c也是0， 只有相等时<!-- raw HTML omitted -->1 and 1<!-- raw HTML omitted -->才为1.</p>
+<h2 id="结语">结语
+</h2><p>NaN 是由 IEEE 754 标准定义的， 其比较是由底层汇编 UCOMISD 完成了。 该指令考虑了无序（存在NaN的情况）时的比较。</p>
+<h2 id="参考文献">参考文献：
+</h2><p><a class="link" href="https://www.felixcloutier.com/x86/ucomisd"  target="_blank" rel="noopener"
+    >https://www.felixcloutier.com/x86/ucomisd</a></p>
+<p><a class="link" href="https://quasilyte.dev/blog/post/go-asm-complementary-reference/"  target="_blank" rel="noopener"
+    >https://quasilyte.dev/blog/post/go-asm-complementary-reference/</a>			(GO 汇编和其他汇编的对照表)</p>
+<p><a class="link" href="https://software.intel.com/sites/default/files/managed/39/c5/325462-sdm-vol-1-2abcd-3abcd.pdf"  target="_blank" rel="noopener"
+    >https://software.intel.com/sites/default/files/managed/39/c5/325462-sdm-vol-1-2abcd-3abcd.pdf</a>   （查找SETNP指令）</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/zh-cn/tags/hugo/">Hugo</a>
+        
+            <a href="/zh-cn/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 我的博客
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.ace0a64a7eb58f090d0d6e79f9d0aad446f137bee44a6d60c2eaffe8c9bbe31d.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
