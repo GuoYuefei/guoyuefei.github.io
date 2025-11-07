@@ -3,26 +3,37 @@ title: "GGB-Blog"
 languageCode: "zh-cn"
 theme: "hugo-theme-stack"
 hasCJKLanguage: true
+copyright: Dev Camp
 
+# -----------------------------------
+# 分页设置
+# -----------------------------------
 pagination:
   pagerSize: 10
 
-# 默认语言设为中文，不建议让默认语言也用子目录（可选）
+# -----------------------------------
+# 语言配置
+# -----------------------------------
 defaultContentLanguage: "zh-cn"
-defaultContentLanguageInSubdir: false
+defaultContentLanguageInSubdir: false   # 中文作为默认语言，不使用子目录
 
+# -----------------------------------
 # 作者信息
+# -----------------------------------
 author:
   name: "GGB"
   bio: "写点技术、生活与想法"
-  avatar: "/img/avatar.png"
 
-# Google Analytics / 其他统计
+# -----------------------------------
+# 统计服务
+# -----------------------------------
 services:
   googleAnalytics:
     id: "G-XXXXXXX"
 
+# -----------------------------------
 # 多语言配置
+# -----------------------------------
 languages:
   zh-cn:
     title: "码帐"
@@ -30,20 +41,29 @@ languages:
     weight: 1
     params:
       description: "一个技术爱好者的博客"
+      sidebar:
+        emoji: 🦄
+        compact: false
+        subtitle: "代码生长，如藤如蔓"
+        avatar:
+          enabled: true
+          local: true
+          src: /img/avatar.png
     menu:
       main:
         - name: "首页"
           url: "/"
           weight: 1
-        - name: "标签"
-          url: "/tags/"
-          weight: 2
-        - name: "主题"
-          url: "/categories/"
-          weight: 3
         - name: "关于"
           url: "/about/"
-          weight: 4
+          weight: 10
+      social:
+        - identifier: github
+          name: GitHub
+          url: https://github.com/GuoYuefei
+          params:
+            icon: brand-github
+      
 
   en:
     title: "Dev Camp"
@@ -52,42 +72,57 @@ languages:
     contentDir: "content/en"
     params:
       description: "A Technology Lover's Blog"
+      sidebar:
+        emoji: 🦄
+        compact: false
+        subtitle: "Code grows like vines."
+        avatar:
+          enabled: true
+          local: true
+          src: /img/avatar.png
     menu:
       main:
         - name: "Home"
           url: "/en/"
           weight: 1
-        - name: "Tags"
-          url: "/en/tags/"
-          weight: 2
-        - name: "Categories"
-          url: "/en/categories/"
-          weight: 3
         - name: "About"
           url: "/en/about/"
-          weight: 4
+          weight: 100
+      social:
+        - identifier: github
+          name: GitHub
+          url: https://github.com/GuoYuefei
+          params:
+            icon: brand-github
 
+
+# -----------------------------------
 # 站点参数
+# -----------------------------------
 params:
-  mainSections: ["posts"]
+  # 主要内容目录
+  mainSections: 
+    - posts
+
+  # 站点图标
   favicon: "img/favicon.png"
+  rssFullContent: true
 
   # SEO / 元数据
   description: "个人博客，分享技术、生活与思考"
   keywords: ["博客", "Hugo", "技术", "生活"]
   robots: "index, follow"
 
-  # 颜色主题
+  # -----------------------------------
+  # 外观设置
+  # -----------------------------------
   colorScheme:
     toggle: true
     default: "auto"
 
-  # Header 设置
-  header:
-    showTitle: true
-    layout: "basic"
-
+  # -----------------------------------
   # 评论系统
+  # -----------------------------------
   comments:
     enabled: true
     provider: "giscus"
@@ -103,14 +138,71 @@ params:
       theme: "preferred_color_scheme"
       crossorigin: "anonymous"
 
+  # -----------------------------------
   # 分析统计
+  # -----------------------------------
   analytics:
     plausible: "blog.naturgift.fun"
     umami: ""
+  
+  article:
+    math: true
+    toc: true   # 显示目录
+    readingTime: true
+  
 
-  # 页脚
+  # -----------------------------------
+  # 页脚信息
+  # -----------------------------------
   footer:
     since: 2025
     poweredby: true
     hugo: true
     theme: true
+
+  widgets:
+    homepage:
+      - type: search
+      - type: archives
+        params:
+          limit: 5
+      - type: categories
+        params:
+          limit: 10
+      - type: tag-cloud
+        params:
+          limit: 10
+    page:
+      - type: search
+      - type: toc
+
+
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - - \[
+              - \]
+            - - $$
+              - $$
+          inline:
+            - - \(
+              - \)
+    renderer:
+      ## Set to true if you have HTML content inside Markdown
+      unsafe: true
+  tableOfContents:
+    endLevel: 3
+    ordered: true
+    startLevel: 0
+  highlight:
+    noClasses: false
+    codeFences: true
+    guessSyntax: true
+    lineNoStart: 1
+    lineNos: true
+    lineNumbersInTable: true
+    tabWidth: 2
