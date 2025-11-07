@@ -1,0 +1,46 @@
+// =============================
+// 代码块
+// =============================
+/* 自定义变量，想改高度改这里即可 */
+$codeblock-max-height: 25em;
+
+/* ① 把最外层 .highlight 作为“唯一”滚动容器 */
+.highlight {
+  max-height: $codeblock-max-height;
+  overflow: auto;                 /* 同时控制 X / Y 两个方向 */
+  -webkit-overflow-scrolling: touch; /* 移动端惯性滚动 */
+}
+
+/* ② 关闭内部 pre / code 自己的滚动（否则会出现双滚动条） */
+.highlight pre,
+.highlight code,
+.highlight .chroma {
+  overflow: visible !important;   /* 覆盖 Stack 里对 pre 的 overflow-x:auto */
+}
+
+/* ③ 让行号用的表格按内容宽度自增，保证超宽时能触发 X 滚动 */
+.lntable {
+  display: inline-table;          /* 仍然保持表格特性但可随内容变宽 */
+  min-width: max-content;
+  border-spacing: 0;
+}
+
+/* ④ 禁止自动换行，超长行通过横向滚动处理 */
+.lntd:last-child code,
+.highlight code {
+  white-space: pre;               /* 不折行 */
+}
+.lntd:first-child {
+  user-select: none; // 禁止选中行号
+}
+
+/* 左列行号 */
+.chroma .lntd, .chroma .lntd pre, .chroma .ln {
+    font-size: 14px;
+    font-family: var(--code-font-family);
+}
+/* 右列代码 */
+.chroma code, .chroma pre {
+    font-size: 14px;
+    font-family: var(--code-font-family);
+}
