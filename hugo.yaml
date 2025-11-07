@@ -54,9 +54,18 @@ languages:
         - name: "首页"
           url: "/"
           weight: 1
-        - name: "关于"
-          url: "/about/"
-          weight: 10
+          params: 
+            icon: home
+        - name: "分类"
+          url: "/categories/"
+          weight: 2
+          params:
+            icon: categories
+        - name: "标签"
+          url: "/tags/"
+          weight: 3
+          params:
+            icon: tag
       social:
         - identifier: github
           name: GitHub
@@ -85,9 +94,18 @@ languages:
         - name: "Home"
           url: "/en/"
           weight: 1
-        - name: "About"
-          url: "/en/about/"
-          weight: 100
+          params: 
+            icon: home
+        - name: "Categories"
+          url: "/categories/"
+          weight: 2
+          params:
+            icon: categories
+        - name: "Tags"
+          url: "/en/tags/"
+          weight: 3
+          params:
+            icon: tag
       social:
         - identifier: github
           name: GitHub
@@ -163,18 +181,24 @@ params:
   widgets:
     homepage:
       - type: search
+      - type: categories
+        params:
+          limit: 6
+      - type: tag-cloud
+        params:
+          limit: 12
       - type: archives
         params:
           limit: 5
-      - type: categories
-        params:
-          limit: 10
-      - type: tag-cloud
-        params:
-          limit: 10
     page:
       - type: search
       - type: toc
+      - type: categories
+        params:
+          limit: 6
+      - type: tag-cloud
+        params:
+          limit: 12 
 
 
 markup:
@@ -195,9 +219,9 @@ markup:
       ## Set to true if you have HTML content inside Markdown
       unsafe: true
   tableOfContents:
-    endLevel: 3
+    endLevel: 4
     ordered: true
-    startLevel: 0
+    startLevel: 2
   highlight:
     noClasses: false
     codeFences: true
