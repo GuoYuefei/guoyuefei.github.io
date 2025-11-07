@@ -1,9 +1,11 @@
 baseURL: "https://guoyuefei.github.io"
-title: "GGB-Blog"
+title: "码帐(Dev Camp)"
 languageCode: "zh-cn"
 theme: "hugo-theme-stack"
 hasCJKLanguage: true
 copyright: Dev Camp
+description: "这是一个分享技术、生活与思考的博客。"
+enableRobotsTXT: true
 
 # -----------------------------------
 # 分页设置
@@ -36,11 +38,11 @@ services:
 # -----------------------------------
 languages:
   zh-cn:
-    title: "码帐"
+    title: "码帐(Dev Camp)"
     languageName: "中文"
     weight: 1
     params:
-      description: "一个技术爱好者的博客"
+      description: "这是一个分享技术、生活与思考的博客。"
       sidebar:
         emoji: 🦄
         compact: false
@@ -80,7 +82,7 @@ languages:
     weight: 2
     contentDir: "content/en"
     params:
-      description: "A Technology Lover's Blog"
+      description: "A Technology AND Life Lover's Blog"
       sidebar:
         emoji: 🦄
         compact: false

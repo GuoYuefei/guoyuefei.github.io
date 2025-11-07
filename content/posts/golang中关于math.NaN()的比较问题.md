@@ -1,6 +1,6 @@
 ---
 title: "golang中关于math.NaN()的比较问题"
-date: 2025-11-06
+date: 2020-08-03
 draft: false
 tags: ["golang"]
 categories: ["技术"]
@@ -157,7 +157,7 @@ RET														; 返回
 
 无序比较操作符 uncomisd 的作用如下： 
 
-> #### (V)UCOMISD (all versions)[ ¶](https://www.felixcloutier.com/x86/ucomisd#-v-ucomisd--all-versions-)
+> ### (V)UCOMISD (all versions)[ ¶](https://www.felixcloutier.com/x86/ucomisd#-v-ucomisd--all-versions-)
 >
 > ```
 > RESULT← UnorderedCompare(DEST[63:0] <> SRC[63:0]) {
