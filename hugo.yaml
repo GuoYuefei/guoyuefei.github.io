@@ -35,12 +35,15 @@ languages:
         - name: "首页"
           url: "/"
           weight: 1
-        - name: "归档"
-          url: "/archives/"
+        - name: "标签"
+          url: "/tags/"
           weight: 2
+        - name: "主题"
+          url: "/categories/"
+          weight: 3
         - name: "关于"
           url: "/about/"
-          weight: 3
+          weight: 4
 
   en:
     title: "Dev Camp"
@@ -54,17 +57,20 @@ languages:
         - name: "Home"
           url: "/en/"
           weight: 1
-        - name: "Archives"
-          url: "/en/archives/"
+        - name: "Tags"
+          url: "/en/tags/"
           weight: 2
+        - name: "Categories"
+          url: "/en/categories/"
+          weight: 3
         - name: "About"
           url: "/en/about/"
-          weight: 3
+          weight: 4
 
 # 站点参数
 params:
   mainSections: ["posts"]
-  favicon: "img/favicon.ico"
+  favicon: "img/favicon.png"
 
   # SEO / 元数据
   description: "个人博客，分享技术、生活与思考"
@@ -99,7 +105,7 @@ params:
 
   # 分析统计
   analytics:
-    plausible: "guoyuefei.github.io"
+    plausible: "blog.naturgift.fun"
     umami: ""
 
   # 页脚
