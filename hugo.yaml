@@ -58,14 +58,9 @@ languages:
           weight: 1
           params: 
             icon: home
-        - name: "分类"
-          url: "/categories/"
-          weight: 2
-          params:
-            icon: categories
         - name: "标签"
           url: "/tags/"
-          weight: 3
+          weight: 2
           params:
             icon: tag
       social:
@@ -98,14 +93,9 @@ languages:
           weight: 1
           params: 
             icon: home
-        - name: "Categories"
-          url: "/categories/"
-          weight: 2
-          params:
-            icon: categories
         - name: "Tags"
           url: "/en/tags/"
-          weight: 3
+          weight: 2
           params:
             icon: tag
       social:
@@ -139,6 +129,10 @@ params:
   colorScheme:
     toggle: true
     default: "auto"
+  
+  customCSS:
+    - "scss/custom.scss"
+  
 
   # -----------------------------------
   # 评论系统
@@ -228,7 +222,7 @@ markup:
     noClasses: false
     codeFences: true
     guessSyntax: true
-    lineNoStart: 1
-    lineNos: true
-    lineNumbersInTable: true
+    # lineNoStart: 1
+    # lineNos: true
+    # lineNumbersInTable: true
     tabWidth: 2

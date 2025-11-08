@@ -11,7 +11,7 @@ menu:
       icon: user
 ---
 
-Welcome to **Dev Camp** 🎉  
-A blog where technology, life, and reflection converge.
+Welcome to **Dev Camp** 🎉
+This is a blog where I share thoughts on technology, life, and everything in between.
 
-From my student years to the present, I’ve journeyed through countless explorations—some documented, others lost to the passage of time. Here, I build a tent of my own: a quiet space to preserve memories, share thoughts, and find a moment of peace.
+From my student days to my professional career, I’ve explored many paths—some documented, some lost to time. To preserve those memories, I’ve created this little “campsite” of my own—a cozy corner of the web where I hope to find a sense of peace and belonging.
