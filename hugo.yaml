@@ -158,7 +158,7 @@ params:
     umami:
       enable: true
       website_id: "058d316a-b1dd-4021-b268-6da7ce8aa9cf"
-      url: "https://umami-nine-tau.vercel.app/script.js"
+      url: "https://umami.naturgift.fun/script.js"  
   
   article:
     math: true
