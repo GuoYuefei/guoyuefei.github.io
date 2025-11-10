@@ -1,0 +1,5 @@
+{{- $umami := .Site.Params.analytics.umami -}}
+{{- if and $umami.enable $umami.website_id $umami.url -}}
+<script async defer data-website-id="{{ $umami.website_id }}" src="{{ $umami.url }}"></script>
+{{- end -}}
+

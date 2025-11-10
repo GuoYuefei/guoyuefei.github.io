@@ -155,8 +155,10 @@ params:
   # 分析统计
   # -----------------------------------
   analytics:
-    plausible: "blog.naturgift.fun"
-    umami: ""
+    umami:
+      enable: true
+      website_id: "058d316a-b1dd-4021-b268-6da7ce8aa9cf"
+      url: "https://umami-kj4h5nlco-guoyuefeis-projects.vercel.app/script.js"
   
   article:
     math: true
