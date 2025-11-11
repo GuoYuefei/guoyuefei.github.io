@@ -138,10 +138,39 @@ html[data-scheme="light"] {
     }
   }
 }
-
+// color: hsl(var(--hue, 200), 70%, 50%);  // 字体颜色用 hue
 
 /* 暗色主题 */
 html[data-scheme="dark"] {
   .tag-btn { background: rgba(20,20,35,0.6); color:#e6e6e6; }
   #post-list article { background: rgba(25,30,55,0.55); }
 }
+
+
+.post-tags {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2; // 保证在 ::before 流光上面
+
+  .post-tag {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    background: hsl(var(--hue, 200), 70%, 50%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
+    &:hover {
+      filter: brightness(1.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+  }
+}
+

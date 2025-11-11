@@ -9,7 +9,7 @@
   </div>
 
   <div id="post-list">
-    <p>请选择一个或多个标签以筛选文章。</p>
+    <p>加载文章中...</p>
   </div>
 </main>
 
@@ -17,36 +17,55 @@
 let allPosts = [];
 let selectedTags = new Set();
 
+// 标签 → hue 映射表
+const tagHueMap = {};
+
+// 根据标签生成固定颜色
+function getTagHue(tag) {
+  if (!tagHueMap[tag]) {
+    let hash = 0;
+    for (let i = 0; i < tag.length; i++) {
+      hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    tagHueMap[tag] = Math.abs(hash) % 360; // 0~359度
+  }
+  return tagHueMap[tag];
+}
+
+// 初始化标签云和文章
 async function initTags() {
   try {
     const res = await fetch('/index.json');
     allPosts = await res.json();
     renderTags();
 
+    // 读取 URL 参数并 decode
     const urlParams = new URLSearchParams(window.location.search);
     const initialTags = urlParams.get('t');
     if (initialTags) {
-      initialTags.split(',').forEach(tag => selectedTags.add(tag));
+      initialTags.split(',').map(decodeURIComponent).forEach(tag => selectedTags.add(tag));
       updateTagStyles();
-      renderPosts();
     }
+
+    renderPosts(); // 默认显示所有有标签文章
   } catch (e) {
     document.getElementById('post-list').innerHTML = '无法加载文章列表。';
   }
 }
 
+// 渲染标签云
 function renderTags() {
   const tags = [...new Set(allPosts.flatMap(p => p.tags || []))].sort();
   const container = document.getElementById('tags');
-  container.innerHTML = tags.map(tag =>
-    `<button class="tag-btn" data-tag="${tag}" onclick="toggleTag('${tag}')">${tag}</button>`
-  ).join('');
+  container.innerHTML = tags.map(tag => {
 
-  document.querySelectorAll('.tag-btn').forEach(btn => {
-    btn.style.setProperty('--hue', Math.floor(Math.random()*360));
-  });
+    const hue = getTagHue(tag);
+    return `<button class="tag-btn" data-tag="${tag}" style="--hue:${hue}" onclick="toggleTag('${tag}')">${tag}</button>`;
+    // return `<button class="tag-btn" data-tag="${tag}" onclick="toggleTag('${tag}')">${tag}</button>`;
+  }).join('');
 }
 
+// 标签点击切换
 function toggleTag(tag) {
   if (selectedTags.has(tag)) selectedTags.delete(tag);
   else selectedTags.add(tag);
@@ -56,53 +75,60 @@ function toggleTag(tag) {
   updateURL();
 }
 
+// 更新标签样式（选中效果）
 function updateTagStyles() {
   document.querySelectorAll('.tag-btn').forEach(btn => {
     btn.classList.toggle('selected', selectedTags.has(btn.dataset.tag));
   });
 }
 
+// 更新 URL
 function updateURL() {
   const url = new URL(window.location);
   if (selectedTags.size > 0) {
-    url.searchParams.set('t', [...selectedTags].join(','));
+    url.searchParams.set('t', [...selectedTags].map(encodeURIComponent).join(','));
   } else {
     url.searchParams.delete('t');
   }
   window.history.replaceState(null, '', url);
 }
 
+// 渲染文章列表
 function renderPosts() {
   const container = document.getElementById('post-list');
-  if (selectedTags.size === 0) {
-    container.innerHTML = '<p>请选择一个或多个标签以筛选文章。</p>';
-    return;
-  }
 
-  const filtered = allPosts.filter(p =>
-    [...selectedTags].every(tag => (p.tags || []).includes(tag))
-  );
+  const filtered = selectedTags.size === 0
+    ? allPosts.filter(p => p.tags && p.tags.length > 0)
+    : allPosts.filter(p =>
+        [...selectedTags].every(tag => (p.tags || []).includes(tag))
+      );
 
   if (filtered.length === 0) {
     container.innerHTML = '<p>没有匹配的文章。</p>';
     return;
   }
 
-  container.innerHTML = filtered.map(p => `
-    <article style="margin-bottom:0.5rem;" data-tags="${(p.tags||[]).join(',')}">
-      <a href="${p.permalink}">${p.title}</a>
-      <small style="color: var(--stack-text-muted, #777);">(${p.date})</small>
-    </article>
-  `).join('');
-
-  document.querySelectorAll('#post-list article').forEach(art => {
-    art.style.setProperty('--hue', Math.floor(Math.random()*360));
-  });
+  container.innerHTML = filtered.map(p => {
+    const artHue = Math.floor(Math.random()*360); // 文章卡片流光随机
+    return `
+      <article style="--hue:${artHue}" data-tags="${(p.tags||[]).join(',')}">
+        <a href="${p.permalink}">${p.title}</a>
+        <small style="color: var(--stack-text-muted, #777);">(${p.date})</small>
+        <div class="post-tags">
+          ${(p.tags||[]).map(tag => {
+            const hue = getTagHue(tag);
+            return `<span class="post-tag" data-tag="${tag}" style="--hue:${hue}" onclick="toggleTag('${tag}')">${tag}</span>`;
+          }).join(' ')}
+        </div>
+      </article>
+    `;
+  }).join('');
 }
 
+// 初始化
 initTags();
 
-// 鼠标跟随流光
+// 鼠标跟随流光效果
 document.addEventListener('mousemove', e => {
   document.querySelectorAll('.tag-btn, #post-list article').forEach(el => {
     const rect = el.getBoundingClientRect();
@@ -111,4 +137,5 @@ document.addEventListener('mousemove', e => {
   });
 });
 </script>
+
 {{ end }}
