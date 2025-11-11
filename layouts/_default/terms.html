@@ -1,0 +1,114 @@
+{{ define "main" }}
+<main class="main full-width">
+  <header class="page-header">
+    <h1>标签云</h1>
+  </header>
+
+  <div id="tag-cloud">
+    <div id="tags"></div>
+  </div>
+
+  <div id="post-list">
+    <p>请选择一个或多个标签以筛选文章。</p>
+  </div>
+</main>
+
+<script>
+let allPosts = [];
+let selectedTags = new Set();
+
+async function initTags() {
+  try {
+    const res = await fetch('/index.json');
+    allPosts = await res.json();
+    renderTags();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialTags = urlParams.get('t');
+    if (initialTags) {
+      initialTags.split(',').forEach(tag => selectedTags.add(tag));
+      updateTagStyles();
+      renderPosts();
+    }
+  } catch (e) {
+    document.getElementById('post-list').innerHTML = '无法加载文章列表。';
+  }
+}
+
+function renderTags() {
+  const tags = [...new Set(allPosts.flatMap(p => p.tags || []))].sort();
+  const container = document.getElementById('tags');
+  container.innerHTML = tags.map(tag =>
+    `<button class="tag-btn" data-tag="${tag}" onclick="toggleTag('${tag}')">${tag}</button>`
+  ).join('');
+
+  document.querySelectorAll('.tag-btn').forEach(btn => {
+    btn.style.setProperty('--hue', Math.floor(Math.random()*360));
+  });
+}
+
+function toggleTag(tag) {
+  if (selectedTags.has(tag)) selectedTags.delete(tag);
+  else selectedTags.add(tag);
+
+  updateTagStyles();
+  renderPosts();
+  updateURL();
+}
+
+function updateTagStyles() {
+  document.querySelectorAll('.tag-btn').forEach(btn => {
+    btn.classList.toggle('selected', selectedTags.has(btn.dataset.tag));
+  });
+}
+
+function updateURL() {
+  const url = new URL(window.location);
+  if (selectedTags.size > 0) {
+    url.searchParams.set('t', [...selectedTags].join(','));
+  } else {
+    url.searchParams.delete('t');
+  }
+  window.history.replaceState(null, '', url);
+}
+
+function renderPosts() {
+  const container = document.getElementById('post-list');
+  if (selectedTags.size === 0) {
+    container.innerHTML = '<p>请选择一个或多个标签以筛选文章。</p>';
+    return;
+  }
+
+  const filtered = allPosts.filter(p =>
+    [...selectedTags].every(tag => (p.tags || []).includes(tag))
+  );
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<p>没有匹配的文章。</p>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(p => `
+    <article style="margin-bottom:0.5rem;" data-tags="${(p.tags||[]).join(',')}">
+      <a href="${p.permalink}">${p.title}</a>
+      <small style="color: var(--stack-text-muted, #777);">(${p.date})</small>
+    </article>
+  `).join('');
+
+  document.querySelectorAll('#post-list article').forEach(art => {
+    art.style.setProperty('--hue', Math.floor(Math.random()*360));
+  });
+}
+
+initTags();
+
+// 鼠标跟随流光
+document.addEventListener('mousemove', e => {
+  document.querySelectorAll('.tag-btn, #post-list article').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--x', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--y', `${e.clientY - rect.top}px`);
+  });
+});
+</script>
+{{ end }}

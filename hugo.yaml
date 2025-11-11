@@ -7,6 +7,11 @@ copyright: Dev Camp
 description: "这是一个分享技术、生活与思考的博客。"
 enableRobotsTXT: true
 
+outputs:
+  home:
+    - HTML
+    - JSON
+
 # -----------------------------------
 # 分页设置
 # -----------------------------------
