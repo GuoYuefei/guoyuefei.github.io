@@ -35,7 +35,10 @@ function getTagHue(tag) {
 // 初始化标签云和文章
 async function initTags() {
   try {
-    const res = await fetch('/index.json');
+    const lang = window.location.pathname.split('/')[1];
+    const jsonPath = (lang && lang.length === 2) ? `/${lang}/index.json` : '/index.json';
+    const res = await fetch(jsonPath);
+    // const res = await fetch('/index.json');
     allPosts = await res.json();
     renderTags();
 
