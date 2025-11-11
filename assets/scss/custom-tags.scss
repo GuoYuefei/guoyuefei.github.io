@@ -22,22 +22,6 @@
   transition: all 0.3s ease;
   z-index: 0;
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at var(--x, 50%) var(--y, 50%),
-      hsl(var(--hue, 200), 100%, 70%) 0%,
-      transparent 60%
-    );
-    mix-blend-mode: screen;
-    opacity: 0.6;
-    pointer-events: none;
-    z-index: 1;
-    transition: opacity 0.2s ease;
-  }
-
   &:hover {
     transform: translateY(-2px) scale(1.03);
     font-weight: 700;
@@ -57,6 +41,7 @@
 /* 文章卡片 */
 #post-list {
   margin-top: 2.4rem;
+  margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -74,21 +59,6 @@
   overflow: hidden;
   transition: all 0.4s ease;
   z-index: 0;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at var(--x, 50%) var(--y, 50%),
-      hsl(var(--hue, 200), 80%, 60%) 0%,
-      transparent 50%
-    );
-    mix-blend-mode: screen;
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: 1;
-  }
 
   a {
     position: relative;
@@ -172,5 +142,23 @@ html[data-scheme="dark"] {
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
   }
+}
+
+.tag-btn::before,
+#post-list article::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse var(--radius-x, 30vw) var(--radius-y, 25vw)
+    at var(--x, 50%) var(--y, 50%),
+    hsl(var(--hue, 200), 80%, 60%) 0%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
 }
 
