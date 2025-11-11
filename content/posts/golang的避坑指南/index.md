@@ -2,9 +2,10 @@
 title: "goland的避坑指南"
 date: 2020-04-27
 draft: false
-tags: ["golang"]
+tags: ["golang","编程技巧"]
 categories: ["技术"]
-description: "go语言避坑"
+keywords: ["golang", "避坑指南", "go语言陷阱", "golang最佳实践", "go编程技巧", "切片", "map", "指针", "init函数"]
+description: "Go语言编程中的常见陷阱与避坑指南，详细解析指针使用、切片操作、map处理、init函数等核心概念的最佳实践和注意事项"
 ---
 
 # golang的避坑指南

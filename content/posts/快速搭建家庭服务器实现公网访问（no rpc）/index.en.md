@@ -1,10 +1,11 @@
 ---
-title: "Quick Setup Guide for CasaOS Home Server System"
+title: "Quick Setup of Home Server System with CasaOS"
 date: 2024-05-01
 draft: false
-tags: ["NAS"]
+tags: ["NAS", "home-server", "casaos"]
 categories: ["Tech", "DIY"]
-description: "Build Your Own NAS System Using a Mini PC"
+keywords: ["casaos", "home server", "NAS system", "mini PC", "home cloud", "private cloud", "server setup", "self-hosted NAS"]
+description: "Step-by-step tutorial: How to quickly set up a home server system using mini PC with CasaOS, creating personal NAS and private cloud storage solutions"
 ---
 
 # Quick Setup Guide for CasaOS Home Server System

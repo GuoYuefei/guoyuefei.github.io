@@ -1,10 +1,11 @@
 ---
-title: "Pitfalls of defer in Go"
+title: "Common Pitfalls with defer in Golang"
 date: 2020-07-16
 draft: false
-tags: ["golang"]
+tags: ["golang", "defer", "programming-techniques"]
 categories: ["Tech"]
-description: "Avoiding pitfalls with defer in Go language"
+keywords: ["golang", "defer", "defer pitfalls", "return execution order", "deferred execution", "named return values", "closure capture", "defer mechanism"]
+description: "In-depth analysis of common pitfalls with defer statements in Go, examining execution order between return and defer, impact of named return values, closure capture mechanisms, and providing practical avoidance guidelines"
 ---
 
 # Pitfalls of defer

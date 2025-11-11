@@ -4,6 +4,7 @@ date: 2020-05-24
 draft: false
 tags: ["golang"]
 categories: ["技术"]
+keywords: ["golang", "交叉编译", "golang交叉编译", "Go语言跨平台编译", "多平台构建", "go build", "目标平台", "跨平台开发"]
 description: "golang在不同平台编译其他架构和系统的方法"
 ---
 

@@ -2,9 +2,10 @@
 title: "快速搭建家庭服务器系统casaos"
 date: 2024-05-01
 draft: false
-tags: ["NAS"]
+tags: ["NAS", "家庭服务器", "casaos"]
 categories: ["技术", "折腾"]
-description: "使用迷你主机搭建自己的NAS系统"
+keywords: ["casaos", "家庭服务器", "NAS系统", "迷你主机", "家庭云", "私有云", "服务器搭建", "自建NAS"]
+description: "详细教程：如何使用迷你主机快速搭建基于casaos的家庭服务器系统，打造个人NAS和私有云存储解决方案"
 ---
 
 # 快速搭建家庭服务器系统casaos

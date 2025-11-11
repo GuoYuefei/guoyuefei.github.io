@@ -4,6 +4,7 @@ date: 2021-06-18
 draft: false
 tags: ["python"]
 categories: ["技术"]
+keywords: ["miniconda", "python"]
 description: "简单使用miniconda"
 ---
 

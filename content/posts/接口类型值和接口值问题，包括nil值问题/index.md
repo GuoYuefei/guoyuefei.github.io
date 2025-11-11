@@ -2,9 +2,10 @@
 title: "接口类型值和接口值问题，包括nil值问题"
 date: 2020-07-29
 draft: false
-tags: ["golang"]
+tags: ["golang", "接口", "类型系统"]
 categories: ["技术"]
-description: "go语言避坑"
+keywords: ["golang", "接口类型", "接口值", "nil值问题", "Go接口", "类型断言", "空接口", "接口比较"]
+description: "深入解析Golang中接口类型值和接口值的相关问题，特别是nil值在接口中的特殊行为和陷阱，涵盖类型断言、空接口处理等核心概念"
 ---
 
 # 接口类型值和接口值问题，包括nil值问题

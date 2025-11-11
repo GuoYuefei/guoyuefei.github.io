@@ -2,9 +2,10 @@
 title: "golang中关于math.NaN()的比较问题"
 date: 2020-08-03
 draft: false
-tags: ["golang"]
+tags: ["golang", "浮点数", "数学运算"]
 categories: ["技术"]
-description: "一篇认识golang中NaN的文章"
+keywords: ["golang", "math.NaN", "NaN比较", "浮点数比较", "Go语言NaN", "IEEE754", "浮点数陷阱", "数学运算"]
+description: "深入解析Golang中math.NaN()的比较问题，探讨IEEE754浮点数标准在Go语言中的实现，以及如何正确处理NaN值的比较和判断"
 ---
 
 # 关于math.NaN() 的比较问题

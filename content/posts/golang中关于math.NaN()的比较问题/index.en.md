@@ -2,9 +2,10 @@
 title: "Comparison Issues with math.NaN() in Golang"
 date: 2020-08-03
 draft: false
-tags: ["golang"]
+tags: ["golang", "floating-point", "mathematics"]
 categories: ["Tech"]
-description: "An article understanding NaN in Golang"
+keywords: ["golang", "math.NaN", "NaN comparison", "floating point comparison", "Go NaN", "IEEE754", "floating point pitfalls", "mathematical operations"]
+description: "In-depth analysis of comparison issues with math.NaN() in Golang, exploring IEEE754 floating-point standard implementation in Go and how to properly handle NaN value comparisons and checks"
 ---
 
 # Comparison Issues with math.NaN()
