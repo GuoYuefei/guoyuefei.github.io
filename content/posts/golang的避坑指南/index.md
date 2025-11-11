@@ -26,7 +26,7 @@ description: "Go语言编程中的常见陷阱与避坑指南，详细解析指�
 ## 1. 可以返回局部变量的指针  
 作为少数包含指针的语言，它与C还是有所不同。C中函数不能够返回局部变量的指针，因为函数结束时局部变量就会从栈中释放。而golang可以做到返回局部变量的一点  
 
-```
+```c++
 #include <iostream>
 using namespace std;
 int* get_some() {

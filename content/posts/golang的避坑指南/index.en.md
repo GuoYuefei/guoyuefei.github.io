@@ -6,10 +6,12 @@ tags: ["golang","programming-techniques"]
 categories: ["Tech"]
 keywords: ["golang", "pitfalls", "go programming traps", "golang best practices", "go programming tips", "slices", "maps", "pointers", "init function", "value types", "reference types"]
 description: "Common pitfalls and avoidance guide in Go language programming, detailed analysis of best practices and considerations for pointers usage, slice operations, map handling, init function and other core concepts"
+---
 
 # Golang Pitfall Avoidance Guide
 
-​----
+---
+
 <h2>Table of Contents</h2>
 
 - [1. Can Return Pointers to Local Variables](#1-can-return-pointers-to-local-variables)
@@ -22,12 +24,13 @@ description: "Common pitfalls and avoidance guide in Go language programming, de
 - [8. The Story of append](#8-the-story-of-append)
 - [9. Two Ways to Traverse Strings](#9-two-ways-to-traverse-strings)
 
-​----
+---
+
 ## 1. Can Return Pointers to Local Variables
 
 As one of the few languages that includes pointers, it differs from C. In C, functions cannot return pointers to local variables because local variables are released from the stack when the function ends. However, Golang can return pointers to local variables.
 
-```
+```c++
 #include <iostream>
 using namespace std;
 int* get_some() {
