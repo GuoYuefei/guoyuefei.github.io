@@ -107,6 +107,32 @@ html[data-scheme="light"] {
       color: #666; /* 日期文字更浅色 */
     }
   }
+  
+  /* 流光效果 亮色下优化 */
+  .tag-btn::before,
+  #post-list article::before {
+    background:
+      radial-gradient(
+        ellipse var(--radius-x, 30vw) var(--radius-y, 25vw)
+        at var(--x, 50%) var(--y, 50%),
+        hsla(var(--hue, 200), 80%, 55%, 0.20) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse var(--radius-x, 30vw) var(--radius-y, 25vw)
+        at var(--mx, 50%) var(--my, 50%),
+        hsla(var(--hue, 200), 90%, 60%, 0.24) 0%,
+        transparent 75%
+      );
+    mix-blend-mode: overlay; /* 改成 overlay 混合模式，亮底上可见 */
+    opacity: 0.8;
+  }
+
+  .tag-btn.selected::before {
+    opacity: 0.95;
+    filter: brightness(1.15);
+  }
+
 }
 // color: hsl(var(--hue, 200), 70%, 50%);  // 字体颜色用 hue
 
