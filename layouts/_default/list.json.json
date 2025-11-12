@@ -2,7 +2,7 @@
 {{- range .Site.RegularPages }}
   {{- $.Scratch.Add "posts" (dict 
       "title" .Title 
-      "permalink" .Permalink 
+      "permalink" .RelPermalink
       "tags" .Params.tags
       "date" (.Date.Format "2006-01-02")
   ) -}}
