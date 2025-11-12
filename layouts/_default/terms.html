@@ -17,6 +17,7 @@
 
 <script>
 const perPage = {{ .Site.Params.pagination.pagerSize | default 7 }};
+let currentPage = 1;
 let allPosts = [];
 let selectedTags = new Set();
 
@@ -78,6 +79,9 @@ function renderTags() {
 function toggleTag(tag) {
   if (selectedTags.has(tag)) selectedTags.delete(tag);
   else selectedTags.add(tag);
+  
+  // 切换标签后重置当前页为第一页
+  currentPage = 1;
 
   updateTagStyles();
   renderPosts();
@@ -103,7 +107,7 @@ function updateURL() {
 }
 
 // 渲染文章列表
-let currentPage = 1;
+
 function renderPosts() {
   const container = document.getElementById('post-list');
 
