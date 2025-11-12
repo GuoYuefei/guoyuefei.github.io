@@ -3,7 +3,7 @@ title: "Golang Pitfall Avoidance Guide"
 date: 2020-04-27
 draft: false
 tags: ["golang","programming-techniques"]
-categories: ["Tech"]
+categories: ["Programming-Languages"]
 keywords: ["golang", "pitfalls", "go programming traps", "golang best practices", "go programming tips", "slices", "maps", "pointers", "init function", "value types", "reference types"]
 description: "Common pitfalls and avoidance guide in Go language programming, detailed analysis of best practices and considerations for pointers usage, slice operations, map handling, init function and other core concepts"
 ---

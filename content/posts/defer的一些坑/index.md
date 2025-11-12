@@ -2,8 +2,8 @@
 title: "defer的一些坑"
 date: 2020-07-16
 draft: false
-tags: ["golang", "defer", "编程技巧"]
-categories: ["技术"]
+tags: ["golang", "编程技巧"]
+categories: ["编程语言"]
 keywords: ["golang", "defer", "defer陷阱", "return执行顺序", "延迟执行", "命名返回值", "闭包捕获", "defer原理"]
 description: "深入解析Go语言defer语句的常见陷阱，详细分析return与defer的执行顺序、命名返回值的影响、闭包捕获机制等核心问题，提供避坑指南"
 ---

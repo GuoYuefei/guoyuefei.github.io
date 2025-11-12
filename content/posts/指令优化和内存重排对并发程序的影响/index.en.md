@@ -2,8 +2,8 @@
 title: "Impact of Instruction Optimization and Memory Reordering on Concurrent Programs"
 date: 2020-06-30
 draft: false
-tags: ["golang", "concurrency", "performance-optimization"]
-categories: ["Tech"]
+tags: ["golang", "concurrency", "performance-optimization", "memory-safety"]
+categories: ["Programming-Languages"]
 keywords: ["golang", "instruction optimization", "memory reordering", "concurrent programs", "memory model", "compiler optimization", "concurrency safety", "reordering"]
 description: "In-depth analysis of how instruction optimization and memory reordering affect Golang concurrent programs, exploring compiler optimizations, memory models and ensuring program correctness in optimized environments"
 ---

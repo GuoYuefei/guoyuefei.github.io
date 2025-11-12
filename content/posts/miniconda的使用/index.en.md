@@ -3,7 +3,7 @@ title: "Using Miniconda"
 date: 2021-06-18
 draft: false
 tags: ["python"]
-categories: ["Tech"]
+categories: ["Programming-Languages"]
 keywords: ["miniconda", "python"]
 description: "Basic usage of Miniconda"
 ---

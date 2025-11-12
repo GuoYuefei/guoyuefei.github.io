@@ -3,7 +3,7 @@ title: "miniconda的使用"
 date: 2021-06-18
 draft: false
 tags: ["python"]
-categories: ["技术"]
+categories: ["编程语言"]
 keywords: ["miniconda", "python"]
 description: "简单使用miniconda"
 ---

@@ -3,7 +3,7 @@ title: "Interface Type Values and Interface Value Issues, Including nil Problems
 date: 2020-07-29
 draft: false
 tags: ["golang", "interfaces", "type-system"]
-categories: ["Tech"]
+categories: ["Programming-Languages"]
 keywords: ["golang", "interface types", "interface values", "nil issues", "Go interfaces", "type assertion", "empty interface", "interface comparison"]
 description: "In-depth analysis of interface type values and interface value issues in Golang, particularly the special behavior and pitfalls of nil values in interfaces, covering type assertion, empty interface handling and other core concepts"
 ---
