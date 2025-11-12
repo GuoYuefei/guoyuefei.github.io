@@ -11,9 +11,12 @@
   <div id="post-list">
     <p>加载文章中...</p>
   </div>
+  
+  <div id="pagination" style="text-align:center;margin-top:1rem;"></div>
 </main>
 
 <script>
+const perPage = {{ .Site.Params.pagination.pagerSize | default 7 }};
 let allPosts = [];
 let selectedTags = new Set();
 
@@ -53,6 +56,7 @@ async function initTags() {
 
     renderPosts(); // 默认显示所有有标签文章
   } catch (e) {
+    console.log(e);
     document.getElementById('post-list').innerHTML = '无法加载文章列表。';
   }
 }
@@ -99,6 +103,7 @@ function updateURL() {
 }
 
 // 渲染文章列表
+let currentPage = 1;
 function renderPosts() {
   const container = document.getElementById('post-list');
 
@@ -110,11 +115,16 @@ function renderPosts() {
 
   if (filtered.length === 0) {
     container.innerHTML = '<p>没有匹配的文章。</p>';
+    document.getElementById('pagination').innerHTML = '';
     return;
   }
 
-  container.innerHTML = filtered.map(p => {
-    const artHue = Math.floor(Math.random()*360); // 文章卡片流光随机
+  const totalPages = Math.ceil(filtered.length / perPage);
+  const start = (currentPage - 1) * perPage;
+  const pagePosts = filtered.slice(start, start + perPage);
+
+  container.innerHTML = pagePosts.map(p => {
+    const artHue = Math.floor(Math.random() * 360);
     return `
       <article style="--hue:${artHue}" data-tags="${(p.tags||[]).join(',')}">
         <a href="${p.permalink}">${p.title}</a>
@@ -128,6 +138,66 @@ function renderPosts() {
       </article>
     `;
   }).join('');
+
+  renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+  const pagination = document.getElementById('pagination');
+  if (!pagination) return;
+
+  // 没有分页或只有一页
+  if (totalPages <= 1) {
+    pagination.innerHTML = '';
+    return;
+  }
+
+  const maxButtons = 7; // 最多显示7个页码按钮（含省略）
+  const pages = [];
+  const addBtn = (page, label = page) => {
+    pages.push(`<button class="page-btn ${page === currentPage ? 'active' : ''}" 
+      onclick="gotoPage(${page})">${label}</button>`);
+  };
+
+  // 上一页
+  if (currentPage > 1)
+    addBtn(currentPage - 1, '«');
+
+  // 计算页码范围
+  let start = Math.max(1, currentPage - 2);
+  let end = Math.min(totalPages, currentPage + 2);
+
+  // 调整范围，确保显示数量不超过 maxButtons
+  if (currentPage <= 3) end = Math.min(totalPages, maxButtons - 2);
+  if (currentPage >= totalPages - 2) start = Math.max(1, totalPages - (maxButtons - 3));
+
+  // 头部省略号
+  if (start > 1) {
+    addBtn(1);
+    if (start > 2) pages.push(`<span class="ellipsis">…</span>`);
+  }
+
+  // 中间页码
+  for (let i = start; i <= end; i++) addBtn(i);
+
+  // 尾部省略号
+  if (end < totalPages) {
+    if (end < totalPages - 1) pages.push(`<span class="ellipsis">…</span>`);
+    addBtn(totalPages);
+  }
+
+  // 下一页
+  if (currentPage < totalPages)
+    addBtn(currentPage + 1, '»');
+
+  pagination.innerHTML = pages.join(' ');
+}
+
+
+function gotoPage(page) {
+  currentPage = page;
+  renderPosts();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function initCenterGlow() {
