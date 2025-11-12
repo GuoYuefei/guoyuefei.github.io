@@ -132,7 +132,7 @@ html[data-scheme="dark"] {
     font-size: 1rem;
     font-weight: 500;
     color: #fff;
-    background: hsl(var(--hue, 200), 70%, 50%);
+    background: hsla(var(--hue, 200), 70%, 60%, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -149,16 +149,30 @@ html[data-scheme="dark"] {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse var(--radius-x, 30vw) var(--radius-y, 25vw)
-    at var(--x, 50%) var(--y, 50%),
-    hsl(var(--hue, 200), 80%, 60%) 0%,
-    transparent 70%
-  );
+  background:
+    /* 中心柔光层（初始化时居中） */
+    radial-gradient(
+      ellipse var(--radius-x, 25vw) var(--radius-y, 20vw)
+      at var(--x, 50%) var(--y, 50%),
+      hsla(var(--hue, 200), 70%, 61%, 0.41) 0%,
+      transparent 70%
+    ),
+    /* 鼠标流光层（跟随鼠标移动） */
+    radial-gradient(
+      ellipse var(--radius-x, 30vw) var(--radius-y, 25vw)
+      at var(--mx, 50%) var(--my, 50%),
+      hsla(var(--hue, 200), 90%, 68%, 0.6) 0%,
+      transparent 75%
+    );
   mix-blend-mode: screen;
-  opacity: 0.5;
+  opacity: 0.55;
   pointer-events: none;
   z-index: 1;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+.tag-btn:hover::before,
+#post-list article:hover::before {
+  opacity: 0.8;
+  transform: scale(1.03);
+}

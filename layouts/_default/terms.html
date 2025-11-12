@@ -25,9 +25,10 @@ function getTagHue(tag) {
   if (!tagHueMap[tag]) {
     let hash = 0;
     for (let i = 0; i < tag.length; i++) {
-      hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+      const code = tag.charCodeAt(i);
+      hash = (hash << 5) ^ (hash >> 2) ^ code; // 更好的位混合
     }
-    tagHueMap[tag] = Math.abs(hash) % 360; // 0~359度
+    tagHueMap[tag] = Math.abs(hash) % 3600 / 10.0; // 0~359度
   }
   return tagHueMap[tag];
 }
@@ -64,6 +65,7 @@ function renderTags() {
     // return `<button class="tag-btn" data-tag="${tag}" onclick="toggleTag('${tag}')">${tag}</button>`;
   }).join('');
 }
+
 
 // 标签点击切换
 function toggleTag(tag) {
@@ -125,27 +127,45 @@ function renderPosts() {
   }).join('');
 }
 
-// 初始化
-initTags();
-
-// 鼠标跟随流光效果
-document.addEventListener('mousemove', e => {
-  const { innerWidth, innerHeight } = window;
-  const xRatio = e.clientX / innerWidth;   // 0~1
-  const yRatio = e.clientY / innerHeight;  // 0~1
-
-  // 动态计算光晕半径
-  const radiusX = 25 + Math.abs(xRatio - 0.5) * 20;
-  const radiusY = 22 + Math.abs(yRatio - 0.5) * 18; 
-
+function initCenterGlow() {
   document.querySelectorAll('.tag-btn, #post-list article').forEach(el => {
     const rect = el.getBoundingClientRect();
-    el.style.setProperty('--x', `${e.clientX - rect.left}px`);
-    el.style.setProperty('--y', `${e.clientY - rect.top}px`);
+    el.style.setProperty('--x', `${rect.width / 2}px`);
+    el.style.setProperty('--y', `${rect.height / 2}px`);
+    el.style.setProperty('--radius-x', `25vw`);
+    el.style.setProperty('--radius-y', `22vw`);
+  });
+}
+
+
+// 初始化
+initTags();
+initCenterGlow();   // 初始化光晕
+
+// 鼠标跟随流动光晕
+document.addEventListener('mousemove', e => {
+  const { innerWidth, innerHeight } = window;
+  const xRatio = e.clientX / innerWidth;
+  const yRatio = e.clientY / innerHeight;
+
+  // 根据位置动态调整鼠标光晕大小
+  const radiusX = 25 + Math.abs(xRatio - 0.5) * 20;
+  const radiusY = 22 + Math.abs(yRatio - 0.5) * 18;
+
+  // 动态为每个元素添加鼠标光晕的偏移效果
+  document.querySelectorAll('.tag-btn, #post-list article').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+
+    // 用CSS变量保存鼠标光晕
+    el.style.setProperty('--mx', `${offsetX}px`);
+    el.style.setProperty('--my', `${offsetY}px`);
     el.style.setProperty('--radius-x', `${radiusX}vw`);
     el.style.setProperty('--radius-y', `${radiusY}vw`);
   });
 });
+
 
 
 
