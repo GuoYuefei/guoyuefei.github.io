@@ -2,7 +2,7 @@
 title: "Go语言unsafe包详解"
 date: 2020-11-15
 draft: false
-tags: ["golang", "unsafe", "指针", "内存安全"]
+tags: ["golang", "指针", "内存安全"]
 categories: ["编程语言"]
 keywords: ["golang", "unsafe包", "指针操作", "内存访问", "类型转换", "底层编程", "Go语言不安全编程"]
 description: "深入解析Go语言unsafe包的使用方法、应用场景和潜在风险"

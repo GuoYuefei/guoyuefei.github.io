@@ -2,7 +2,7 @@
 title: "Comprehensive Guide to Go's unsafe Package"
 date: 2023-11-15
 draft: false
-tags: ["golang", "unsafe", "pointers", "memory-safety"]
+tags: ["golang", "pointers", "memory-safety"]
 categories: ["Programming-Languages"]
 keywords: ["golang", "unsafe package", "pointer manipulation", "memory access", "type conversion", "low-level programming", "Go unsafe programming"]
 description: "In-depth exploration of Go's unsafe package usage, application scenarios, and potential risks"
