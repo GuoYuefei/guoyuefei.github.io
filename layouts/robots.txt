@@ -1,0 +1,6 @@
+User-agent: *
+Disallow:
+
+{{ if .Site.BaseURL }}
+Sitemap: {{ .Site.BaseURL }}sitemap.xml
+{{ end }}
